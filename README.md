@@ -1,59 +1,64 @@
-# NicksFlixAngularClient
+# CineVerse Frontend Development with Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
+## Project description
 
-## Development server
+Welcome to CineVerse! This project focuses on building the frontend interface for CineVerse using Angular. With a strong backend already in place, including a REST API and database, our goal is to create a seamless and engaging user experience.
 
-To start a local development server, run:
+**Key Features**
 
-```bash
-ng serve
-```
+- **Welcome View:** The app displays a welcome view allowing users to log in or register an account.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Authentication:** Authenticated users can view all movies.
 
-## Code scaffolding
+- **Single Movie View:** Clicking on a movie displays additional details in a single movie view.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- **Director View:** Users can access details about the director of the selected movie by clicking a button.
 
-```bash
-ng generate component component-name
-```
+**Highlights**
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **One-Page Layout** - the application features a single-page layout, ensuring a smooth and intuitive user journey.
 
-```bash
-ng generate --help
-```
+- **Angular Material** - for a visually appealing and responsive design.
 
-## Building
+## Used Technologies
 
-To build the project run:
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.4.
 
-```bash
-ng build
-```
+- Angular: A powerful web application framework.
+- Angular Material: A UI component library for Angular applications.
+- RxJS: A library for reactive programming using Observables.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Getting Started
 
-## Running unit tests
+- Clone this repository
+- Install all the project dependencies:
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+       npm install
 
-```bash
-ng test
-```
+- Run the comand for a dev server and navigate to `http://localhost:8080/`. The application will automatically reload if you change any of the source files.
 
-## Running end-to-end tests
+       ng serve --port 8080
 
-For end-to-end (e2e) testing, run:
+## Deployment
 
-```bash
-ng e2e
-```
+Deploy your application to GitHub Pages.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Create a new repository on GitHub
 
-## Additional Resources
+- In your terminal, run this command (replace `username` and `repository-name` with your data):
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+       git remote add origin https://github.com/<GitHub-username>/<repository-name>.git
+
+- Add angular-cli-ghpages by running
+
+       ng add angular-cli-ghpages
+
+- To build your application, run the command (replace <repository-name> with your own repository name)
+
+       ng deploy --base-href=/<repository-name>/
+
+- The URL of your application will be then `https://<GitHub-username>.github.io/<repository-name>/`
+
+Whenever you make any changes to your application's code, all you need to do is run the command:
+
+       ng deploy --base-href=/<repository-name>/

@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 
+/**
+ * Represents the root component of the Angular application.
+ */
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'nicksFlix-Angular-client';
+  /**
+   * Title of the application.
+   */
+  title = 'myFlix-Angular-client';
 }
