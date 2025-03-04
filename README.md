@@ -1,8 +1,8 @@
-# CineVerse Frontend Development with Angular
+# Nicks Flix Frontend Development with Angular
 
 ## Project description
 
-Welcome to CineVerse! This project focuses on building the frontend interface for CineVerse using Angular. With a strong backend already in place, including a REST API and database, our goal is to create a seamless and engaging user experience.
+Welcome to Nicks Flix! This project focuses on building the frontend interface for Nicks Flix using Angular. With a strong backend already in place, including a REST API and database, our goal is to create a seamless and engaging user experience.
 
 **Key Features**
 

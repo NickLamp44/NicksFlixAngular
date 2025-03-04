@@ -6,7 +6,6 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { MatInputModule } from '@angular/material/input';
@@ -32,17 +31,17 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
+// Define application routes
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
   { path: 'profile', component: ProfilePageComponent },
-  { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
-  { path: 'profile', redirectTo: 'welcome', pathMatch: 'prefix' },
+  { path: '', redirectTo: 'welcome', pathMatch: 'full' }, // Fix `pathMatch: 'full'`
 ];
 
 @NgModule({
   declarations: [
-    AppComponent,
+    // Removed AppComponent from declarations since it's standalone
     UserRegistrationFormComponent,
     UserLoginFormComponent,
     MovieCardComponent,
@@ -67,13 +66,12 @@ const appRoutes: Routes = [
     MatCardModule,
     MatButtonModule,
     MatInputModule,
-    HttpClientModule,
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
     MatTabsModule,
   ],
   providers: [provideClientHydration(), provideAnimationsAsync()],
-  bootstrap: [AppComponent],
+  // Removed `bootstrap: [AppComponent]`
 })
 export class AppModule {}
