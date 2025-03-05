@@ -1,20 +1,38 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
 import { UserRegistrationService } from '../fetch-api-data.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-user-registration-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    FormsModule,
+  ],
   templateUrl: './user-registration-form.component.html',
-  styleUrl: './user-registration-form.component.scss',
+  styleUrls: ['./user-registration-form.component.scss'],
 })
 export class UserRegistrationFormComponent implements OnInit {
   @Input() userData = {
     UserName: '',
     Password: '',
     Email: '',
-    Birthdate: Date,
+    Birthdate: '',
   };
+
   constructor(
     public fetchApiData: UserRegistrationService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
@@ -22,18 +40,19 @@ export class UserRegistrationFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-  // This is the function responsible for sending the form inputs to the backend
+
   registerUser(): void {
     this.fetchApiData.userRegistration(this.userData).subscribe(
       (result) => {
-        // Logic for a successful user registration goes here! (To be implemented)
-        this.dialogRef.close(); // This will close the modal on success!
-        this.snackBar.open(result, 'OK', {
-          duration: 2000,
-        });
+        this.dialogRef.close();
+        this.snackBar.open(
+          'Registration successful! You can now log in.',
+          'OK',
+          { duration: 2000 }
+        );
       },
-      (result) => {
-        this.snackBar.open(result, 'OK', {
+      (error) => {
+        this.snackBar.open('Registration failed. Please try again.', 'OK', {
           duration: 2000,
         });
       }

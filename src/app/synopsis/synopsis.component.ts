@@ -1,27 +1,33 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogRef,
+  MatDialogModule,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+
 /**
- * Represents a dialog component displaying movie synopsis.
+ * Synopsis Component for displaying movie details.
  */
 @Component({
   selector: 'app-synopsis',
+  standalone: true,
+  imports: [CommonModule, MatDialogModule, MatCardModule, MatButtonModule], // ✅ Import required Material Modules
   templateUrl: './synopsis.component.html',
-  styleUrl: './synopsis.component.scss',
+  styleUrls: ['./synopsis.component.scss'],
 })
 export class SynopsisComponent {
   movie: any;
 
-  /**
-   * Initializes the SynopsisComponent.
-   * @param {MatDialogRef<SynopsisComponent>} dialogRef - Reference to the dialog.
-   * @param {any} data - Data injected into the dialog.
-   */
   constructor(
     public dialogRef: MatDialogRef<SynopsisComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.movie = data.movie;
   }
+
   closeDialog(): void {
     this.dialogRef.close();
   }

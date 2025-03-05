@@ -1,20 +1,38 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { DeleteUserComponent } from '../delete-user/delete-user.component';
 import { UpdateInfoUserService } from '../fetch-api-data.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-update-user-form',
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatSnackBarModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    FormsModule,
+    DeleteUserComponent,
+  ],
   templateUrl: './update-user-form.component.html',
-  styleUrl: './update-user-form.component.scss',
+  styleUrls: ['./update-user-form.component.scss'],
 })
 export class UpdateUserFormComponent implements OnInit {
-  UserName = '';
   @Input() userData = {
     UserName: '',
     Password: '',
     Email: '',
-    Birthdate: Date,
+    Birthdate: new Date(),
   };
+
   constructor(
     public fetchApiData: UpdateInfoUserService,
     public snackBar: MatSnackBar
@@ -26,7 +44,6 @@ export class UpdateUserFormComponent implements OnInit {
     this.fetchApiData.updateInfoUser(this.userData).subscribe(
       (resp: any) => {
         this.userData = resp;
-        console.log(resp);
         this.snackBar.open('Update', 'Success', {
           duration: 2000,
         });
