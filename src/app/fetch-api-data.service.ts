@@ -9,7 +9,7 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
-const apiUrl = 'https://nicks-flix-364389a40fe7.herokuapp.com/';
+const apiUrl = 'https://nicks-flix-364389a40fe7.herokuapp.com';
 
 @Injectable({
   providedIn: 'root',
@@ -55,7 +55,7 @@ export class UserRegistrationService extends ErrorAndResponseService {
 
     // Make a POST request to the user registration endpoint
     return this.http
-      .post(apiUrl + '/users', userDetails)
+      .post(`${apiUrl}/users`, userDetails)
       .pipe(catchError(this.handleError), map(this.extractResponseData));
   }
 }
