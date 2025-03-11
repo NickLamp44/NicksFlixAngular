@@ -31,7 +31,7 @@ import { DirectorInfoComponent } from './director-info/director-info.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { UpdateUserFormComponent } from './update-user-form/update-user-form.component';
+
 import { SynopsisComponent } from './synopsis/synopsis.component';
 
 // ✅ Define Application Routes
@@ -71,7 +71,6 @@ const appRoutes: Routes = [
     DeleteUserComponent,
     ConfirmationDialogComponent,
     ToolbarComponent,
-    UpdateUserFormComponent,
     SynopsisComponent,
   ],
   providers: [provideClientHydration(), provideAnimationsAsync()],

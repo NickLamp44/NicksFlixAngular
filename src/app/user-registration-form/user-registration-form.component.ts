@@ -24,6 +24,7 @@ import { UserRegistrationService } from '../fetch-api-data.service';
   ],
   templateUrl: './user-registration-form.component.html',
   styleUrls: ['./user-registration-form.component.scss'],
+  providers: [UserRegistrationService],
 })
 export class UserRegistrationFormComponent implements OnInit {
   @Input() userData = {

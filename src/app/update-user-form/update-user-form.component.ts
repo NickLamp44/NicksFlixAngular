@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
@@ -22,6 +22,7 @@ import { UpdateInfoUserService } from '../fetch-api-data.service';
     FormsModule,
     DeleteUserComponent,
   ],
+  providers: [UpdateInfoUserService],
   templateUrl: './update-user-form.component.html',
   styleUrls: ['./update-user-form.component.scss'],
 })
@@ -33,10 +34,10 @@ export class UpdateUserFormComponent implements OnInit {
     Birthdate: new Date(),
   };
 
-  constructor(
-    public fetchApiData: UpdateInfoUserService,
-    public snackBar: MatSnackBar
-  ) {}
+  public fetchApiData = inject(UpdateInfoUserService);
+  public snackBar = inject(MatSnackBar);
+
+  constructor() {}
 
   ngOnInit(): void {}
 

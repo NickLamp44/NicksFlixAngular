@@ -7,7 +7,6 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
-import { UpdateUserFormComponent } from '../update-user-form/update-user-form.component';
 import { DirectorInfoComponent } from '../director-info/director-info.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
 
@@ -23,7 +22,6 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
     MatSnackBarModule,
     MatTabsModule,
     ToolbarComponent,
-    UpdateUserFormComponent,
   ],
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss'],

@@ -12,9 +12,10 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 @Component({
   selector: 'app-delete-user',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, ConfirmationDialogComponent],
+  imports: [CommonModule, MatDialogModule],
   templateUrl: './delete-user.component.html',
   styleUrls: ['./delete-user.component.scss'],
+  providers: [DeleteUserService],
 })
 export class DeleteUserComponent {
   constructor(

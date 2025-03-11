@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { map, catchError, tap } from 'rxjs/operators';
+
 // import { catchError } from 'rxjs/internal/operators';
 import {
   HttpClient,
@@ -30,8 +31,9 @@ export class ErrorAndResponseService {
       );
     }
     // Return an observable with an error message
-    const err = new Error('Something went wrong, please try again later.');
-    throwError(() => err);
+    return throwError(
+      () => new Error('Something went wrong, please try again later.')
+    );
   }
   protected extractResponseData(res: any): any {
     return res || {}; // Return the response body or an empty object
