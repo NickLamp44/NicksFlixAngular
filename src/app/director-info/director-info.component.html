@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <mat-card>
   <mat-card-header>
-    <mat-card-title>{{ director.Name }}</mat-card-title>
+    <mat-card-title>{{ Director.Name }}</mat-card-title>
     <mat-card-subtitle>
-      <p>Born on: {{ director.Birth | date : "mediumDate" }}</p>
+      <p *ngIf="Director.Birth">Born: {{ Director.Birth }}</p>
+      <p *ngIf="Director.Death">Died: {{ Director.Death }}</p>
     </mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content> {{ director.Bio }}</mat-card-content>
+  <mat-card-content>
+    <p>{{ Director.Bio }}</p>
+  </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="closeDialog()">
       Close

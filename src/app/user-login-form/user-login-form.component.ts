@@ -24,8 +24,8 @@ import { CommonModule } from '@angular/common';
 })
 export class UserLoginFormComponent {
   userData = {
-    UserName: '',
-    Password: '',
+    username: '',
+    password: '',
   };
 
   constructor(private snackBar: MatSnackBar) {}

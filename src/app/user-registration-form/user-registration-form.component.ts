@@ -27,10 +27,10 @@ import { UserRegistrationService } from '../fetch-api-data.service';
 })
 export class UserRegistrationFormComponent implements OnInit {
   @Input() userData = {
-    UserName: '',
-    Password: '',
+    username: '',
+    password: '',
     Email: '',
-    Birthdate: '',
+    Birthday: '',
   };
 
   constructor(

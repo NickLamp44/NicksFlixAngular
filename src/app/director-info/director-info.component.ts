@@ -1,11 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DirectorService } from '../fetch-api-data.service';
-
+import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-director-info',
@@ -14,26 +11,15 @@ import { CommonModule } from '@angular/common';
   templateUrl: './director-info.component.html',
   styleUrls: ['./director-info.component.scss'],
 })
-export class DirectorInfoComponent implements OnInit {
-  director: any;
-  movie: any;
+export class DirectorInfoComponent {
+  Director: any;
 
   constructor(
     public dialogRef: MatDialogRef<DirectorInfoComponent>,
-    public fetchDirector: DirectorService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.movie = data.movie;
-  }
-
-  ngOnInit(): void {
-    this.getDirectorDetails(this.data.directorName);
-  }
-
-  getDirectorDetails(directorName: string): void {
-    this.fetchDirector.getDirector(directorName).subscribe((resp: any) => {
-      this.director = resp;
-    });
+    // ✅ Use the passed-in data instead of making a second API call
+    this.Director = data;
   }
 
   closeDialog(): void {

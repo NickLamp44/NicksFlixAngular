@@ -37,23 +37,39 @@ export class MovieCardComponent implements OnInit {
   }
 
   getMovies(): void {
-    // Simulating fetchMovies call
+    // Example movies array matching MongoDB structure
     this.movies = [
-      { Title: 'Movie 1', Director: 'Director 1' },
-      { Title: 'Movie 2', Director: 'Director 2' },
+      {
+        _id: '6594d9644f3b90ea2185ceba',
+        Title: 'Silence of the Lambs',
+        Description:
+          'A young FBI cadet must receive the help of an incarcerated and... ',
+        Genre: {
+          Name: 'Thriller',
+          Description: 'Thriller film, also known as suspense...',
+        },
+        Director: {
+          Name: 'Jonathan Demme',
+          Bio: 'Robert Jonathan Demme was an American...',
+          Birth: 1944,
+          Death: 2017,
+        },
+        ImagePath: 'SilenceOfTheLambsPoster.jpg',
+        Featured: true,
+      },
     ];
   }
 
   openDirectorDialog(movie: any): void {
     this.dialog.open(DirectorInfoComponent, {
-      data: { directorName: movie.Director },
+      data: movie.Director,
       width: '600px',
     });
   }
 
   openSynopsisDialog(movie: any): void {
     this.dialog.open(SynopsisComponent, {
-      data: { movie },
+      data: movie,
       width: '600px',
     });
   }

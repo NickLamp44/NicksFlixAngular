@@ -29,19 +29,39 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
   styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent implements OnInit {
-  username: string = 'User123';
+  username: string = '';
+  watchlist: any[] = [];
   favorites: any[] = [];
 
   constructor(private snackBar: MatSnackBar, private dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.getUser();
     this.getFavMovies();
   }
 
+  getUser(): void {
+    // Simulating API call to fetch user details
+    const user = {
+      _id: '67d081ff67c3e8fd048057a5',
+      username: 'AngularTest',
+      Email: 'test@email.com',
+      Watchlist: [],
+    };
+
+    this.username = user.username;
+    this.watchlist = user.Watchlist;
+  }
+
   getFavMovies(): void {
+    // Simulating API call for favorites
     this.favorites = [
-      { Title: 'Movie 1', Director: 'Director 1' },
-      { Title: 'Movie 2', Director: 'Director 2' },
+      {
+        Title: 'Silence of the Lambs',
+        Genre: { Name: 'Thriller' },
+        Director: { Name: 'Jonathan Demme' },
+        ImgPath: 'SilenceOfTheLambsPoster.jpg',
+      },
     ];
   }
 
@@ -54,14 +74,14 @@ export class ProfilePageComponent implements OnInit {
 
   openDirectorDialog(movie: any): void {
     this.dialog.open(DirectorInfoComponent, {
-      data: { directorName: movie.Director },
+      data: movie.Director,
       width: '600px',
     });
   }
 
   openSynopsisDialog(movie: any): void {
     this.dialog.open(SynopsisComponent, {
-      data: { movie },
+      data: { title: movie.Title, description: movie.Description },
       width: '600px',
     });
   }

@@ -10,5 +10,5 @@ export const config: ApplicationConfig = {
 })
 export class AppConfig {
   static readonly API_ENDPOINT =
-    'https://nicks-flix-364389a40fe7.herokuapp.com/';
+    'https://nicks-flix-364389a40fe7.herokuapp.com';
 }
