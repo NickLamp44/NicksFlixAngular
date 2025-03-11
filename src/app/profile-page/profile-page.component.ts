@@ -9,6 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { DirectorInfoComponent } from '../director-info/director-info.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
+import { UpdateUserFormComponent } from '../update-user-form/update-user-form.component';
 
 @Component({
   selector: 'app-profile-page',
@@ -22,6 +23,7 @@ import { SynopsisComponent } from '../synopsis/synopsis.component';
     MatSnackBarModule,
     MatTabsModule,
     ToolbarComponent,
+    UpdateUserFormComponent,
   ],
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss'],
