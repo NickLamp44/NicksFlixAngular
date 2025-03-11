@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UserLoginService } from '../fetch-api-data.service';
 
 @Component({
   selector: 'app-user-login-form',
@@ -13,7 +15,6 @@ import { CommonModule } from '@angular/common';
   imports: [
     CommonModule,
     FormsModule,
-    MatSnackBarModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -28,10 +29,39 @@ export class UserLoginFormComponent {
     password: '',
   };
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(
+    private loginService: UserLoginService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
   loginUser(): void {
     console.log('Logging in user:', this.userData);
-    this.snackBar.open('Login successful', 'OK', { duration: 2000 });
+
+    this.loginService.loginUser(this.userData).subscribe(
+      (response: any) => {
+        console.log('Login successful:', response);
+
+        // Store token for authentication persistence
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('username', this.userData.username);
+
+        // Success message
+        this.snackBar.open('Login successful', 'OK', { duration: 2000 });
+
+        // Redirect to movies page
+        this.router.navigate(['/movies']);
+      },
+      (error) => {
+        console.error('Login failed:', error);
+        this.snackBar.open(
+          'Login failed. Please check your credentials.',
+          'OK',
+          {
+            duration: 2000,
+          }
+        );
+      }
+    );
   }
 }

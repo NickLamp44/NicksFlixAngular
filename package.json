@@ -1,5 +1,5 @@
 {
-  "name": "cine-verse-angular-client",
+  "name": "nicksFlix-Angular-client",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:cineVerse-Angular-client": "node dist/cine-verse-angular-client/server/server.mjs"
+    "serve:ssr:nicksFlix-Angular-client": "node dist/nicksFlix-Angular-client/server/server.mjs"
   },
   "private": true,
   "dependencies": {

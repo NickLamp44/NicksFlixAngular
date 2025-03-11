@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { map, catchError, tap } from 'rxjs/operators';
 // import { catchError } from 'rxjs/internal/operators';
 import {
   HttpClient,
@@ -6,7 +7,6 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://nicks-flix-364389a40fe7.herokuapp.com';
@@ -69,14 +69,11 @@ export class UserLoginService extends ErrorAndResponseService {
   constructor(http: HttpClient) {
     super(http);
   }
-  public userLogin(userDetails: any): Observable<any> {
-    return this.http
-      .post(apiUrl + '/login', userDetails, {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-        }),
-      })
-      .pipe(map(this.extractResponseData), catchError(this.handleError));
+  public loginUser(userData: any): Observable<any> {
+    return this.http.post(`${apiUrl}/login`, userData).pipe(
+      tap((response: any) => console.log('Login API response:', response)),
+      catchError(this.handleError)
+    );
   }
 }
 

@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "cineVerse-Angular-client": {
+    "nicksFlix-Angular-client": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -24,7 +24,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/cine-verse-angular-client",
+            "outputPath": "dist/nicksFlix-Angular-client",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "cineVerse-Angular-client:build:production"
+              "buildTarget": "nicksFlix-Angular-client:build:production"
             },
             "development": {
-              "buildTarget": "cineVerse-Angular-client:build:development"
+              "buildTarget": "nicksFlix-Angular-client:build:development"
             },
             "options": {
               "port": 8080,
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "cineVerse-Angular-client:build"
+            "buildTarget": "nicksFlix-Angular-client:build"
           }
         },
         "test": {
