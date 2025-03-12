@@ -32,20 +32,29 @@ export class MovieCardComponent implements OnInit {
   showRightArrow: boolean = true;
 
   constructor(
-    private MovieService: MovieService,
+    private movieService: MovieService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
     this.fetchMovies();
+    this.loadFavorites();
   }
 
   fetchMovies(): void {
-    this.MovieService.getMovies().subscribe(
+    this.movieService.getMovies().subscribe(
       (data) => (this.movies = data),
       (error) => console.error('Error fetching movies:', error)
     );
+  }
+
+  loadFavorites(): void {
+    // Fetch user favorites from localStorage (or update from backend if needed)
+    const storedFavorites = localStorage.getItem('favorites');
+    if (storedFavorites) {
+      this.favorites = JSON.parse(storedFavorites);
+    }
   }
 
   openDirectorDialog(movie: any): void {
@@ -66,18 +75,50 @@ export class MovieCardComponent implements OnInit {
     return this.favorites.includes(movie.Title);
   }
 
+  toggleFavorite(movie: any): void {
+    if (this.isFavorite(movie)) {
+      this.removeTitleFromFavorites(movie);
+    } else {
+      this.addTitleToFavorites(movie);
+    }
+  }
+
   addTitleToFavorites(movie: any): void {
-    this.favorites.push(movie.Title);
-    this.snackBar.open('Movie added to favorites', 'Success', {
-      duration: 2000,
-    });
+    this.movieService.addToFavorites(movie.Title).subscribe(
+      () => {
+        this.favorites.push(movie.Title);
+        localStorage.setItem('favorites', JSON.stringify(this.favorites));
+        this.snackBar.open('Movie added to favorites', 'Success', {
+          duration: 2000,
+        });
+      },
+      (error) => {
+        console.error('Error adding to favorites:', error);
+        this.snackBar.open('Error adding to favorites', 'Error', {
+          duration: 2000,
+        });
+      }
+    );
   }
 
   removeTitleFromFavorites(movie: any): void {
-    this.favorites = this.favorites.filter((title) => title !== movie.Title);
-    this.snackBar.open('Movie removed from favorites', 'Success', {
-      duration: 2000,
-    });
+    this.movieService.removeFromFavorites(movie.Title).subscribe(
+      () => {
+        this.favorites = this.favorites.filter(
+          (title) => title !== movie.Title
+        );
+        localStorage.setItem('favorites', JSON.stringify(this.favorites));
+        this.snackBar.open('Movie removed from favorites', 'Success', {
+          duration: 2000,
+        });
+      },
+      (error) => {
+        console.error('Error removing from favorites:', error);
+        this.snackBar.open('Error removing from favorites', 'Error', {
+          duration: 2000,
+        });
+      }
+    );
   }
 
   scroll(direction: number): void {

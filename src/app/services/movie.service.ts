@@ -20,4 +20,29 @@ export class MovieService {
 
     return this.http.get<Movie[]>(this.apiUrl, { headers });
   }
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      throw new Error('No authentication token found');
+    }
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
+  }
+
+  addToFavorites(movieTitle: string): Observable<any> {
+    const username = localStorage.getItem('username');
+    return this.http.post(
+      `${this.apiUrl}/${username}/movies/${encodeURIComponent(movieTitle)}`,
+      {},
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
+  removeFromFavorites(movieTitle: string): Observable<any> {
+    const username = localStorage.getItem('username');
+    return this.http.delete(
+      `${this.apiUrl}/${username}/movies/${encodeURIComponent(movieTitle)}`,
+      { headers: this.getAuthHeaders() }
+    );
+  }
 }

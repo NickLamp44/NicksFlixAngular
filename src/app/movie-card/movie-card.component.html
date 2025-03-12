@@ -33,11 +33,7 @@
         <button
           class="heart-icon"
           mat-icon-button
-          (click)="
-            isFavorite(movie)
-              ? removeTitleFromFavorites(movie)
-              : addTitleToFavorites(movie)
-          "
+          (click)="toggleFavorite(movie)"
         >
           <mat-icon>{{
             isFavorite(movie) ? "favorite" : "favorite_border"
