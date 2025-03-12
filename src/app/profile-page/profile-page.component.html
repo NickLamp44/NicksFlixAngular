@@ -2,8 +2,10 @@
 <app-toolbar></app-toolbar>
 
 <h1>
-  Hello <span class="userName">{{ username }}!</span>
+  Hello <span class="userName">{{ username }}</span
+  >!
 </h1>
+<p>Email: {{ email }}</p>
 
 <mat-tab-group>
   <mat-tab label="My list of favorite movies">
@@ -23,7 +25,12 @@
 
             <img
               mat-card-image
-              [src]="'/assets/images/' + movie.ImgPath"
+              [src]="
+                movie.ImagePath.startsWith('data:image')
+                  ? movie.ImagePath
+                  : 'https://nicks-flix-364389a40fe7.herokuapp.com/images/' +
+                    movie.ImgPath
+              "
               [alt]="movie.Title"
               width="230"
             />

@@ -10,6 +10,7 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { DirectorInfoComponent } from '../director-info/director-info.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
 import { UpdateUserFormComponent } from '../update-user-form/update-user-form.component';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -30,39 +31,32 @@ import { UpdateUserFormComponent } from '../update-user-form/update-user-form.co
 })
 export class ProfilePageComponent implements OnInit {
   username: string = '';
+  email: string = '';
   watchlist: any[] = [];
   favorites: any[] = [];
 
-  constructor(private snackBar: MatSnackBar, private dialog: MatDialog) {}
+  constructor(
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.getUser();
-    this.getFavMovies();
+    this.getUserProfile();
   }
 
-  getUser(): void {
-    // Simulating API call to fetch user details
-    const user = {
-      _id: '67d081ff67c3e8fd048057a5',
-      username: 'AngularTest',
-      Email: 'test@email.com',
-      Watchlist: [],
-    };
-
-    this.username = user.username;
-    this.watchlist = user.Watchlist;
-  }
-
-  getFavMovies(): void {
-    // Simulating API call for favorites
-    this.favorites = [
-      {
-        Title: 'Silence of the Lambs',
-        Genre: { Name: 'Thriller' },
-        Director: { Name: 'Jonathan Demme' },
-        ImgPath: 'SilenceOfTheLambsPoster.jpg',
+  getUserProfile(): void {
+    this.userService.getUserProfile().subscribe(
+      (user) => {
+        this.username = user.username;
+        this.email = user.Email;
+        this.watchlist = user.Watchlist;
+        this.favorites = user.Favorites || [];
       },
-    ];
+      (error) => {
+        console.error('Error fetching user profile:', error);
+      }
+    );
   }
 
   removeTitleFromFavorites(movie: any): void {
