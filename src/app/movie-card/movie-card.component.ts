@@ -4,10 +4,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { DirectorInfoComponent } from '../director-info/director-info.component';
 import { SynopsisComponent } from '../synopsis/synopsis.component';
-import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
+import { MovieService } from '../services/movie.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -30,34 +31,21 @@ export class MovieCardComponent implements OnInit {
   showLeftArrow: boolean = false;
   showRightArrow: boolean = true;
 
-  constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {}
+  constructor(
+    private MovieService: MovieService,
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
-    this.getMovies();
+    this.fetchMovies();
   }
 
-  getMovies(): void {
-    // Example movies array matching MongoDB structure
-    this.movies = [
-      {
-        _id: '6594d9644f3b90ea2185ceba',
-        Title: 'Silence of the Lambs',
-        Description:
-          'A young FBI cadet must receive the help of an incarcerated and... ',
-        Genre: {
-          Name: 'Thriller',
-          Description: 'Thriller film, also known as suspense...',
-        },
-        Director: {
-          Name: 'Jonathan Demme',
-          Bio: 'Robert Jonathan Demme was an American...',
-          Birth: 1944,
-          Death: 2017,
-        },
-        ImagePath: 'SilenceOfTheLambsPoster.jpg',
-        Featured: true,
-      },
-    ];
+  fetchMovies(): void {
+    this.MovieService.getMovies().subscribe(
+      (data) => (this.movies = data),
+      (error) => console.error('Error fetching movies:', error)
+    );
   }
 
   openDirectorDialog(movie: any): void {
