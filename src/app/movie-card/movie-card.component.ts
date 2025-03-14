@@ -51,7 +51,7 @@ export class MovieCardComponent implements OnInit {
 
   loadFavorites(): void {
     // Fetch user favorites from localStorage (or update from backend if needed)
-    const storedFavorites = localStorage.getItem('favorites');
+    const storedFavorites = localStorage.getItem('Watchist');
     if (storedFavorites) {
       this.favorites = JSON.parse(storedFavorites);
     }
@@ -84,37 +84,47 @@ export class MovieCardComponent implements OnInit {
   }
 
   addTitleToFavorites(movie: any): void {
-    this.movieService.addToFavorites(movie.Title).subscribe(
-      () => {
-        this.favorites.push(movie.Title);
+    this.movieService.addToWatchlist(movie._id).subscribe(
+      (updatedUser) => {
+        this.favorites.push(movie._id);
         localStorage.setItem('favorites', JSON.stringify(this.favorites));
-        this.snackBar.open('Movie added to favorites', 'Success', {
-          duration: 2000,
-        });
+        this.snackBar.open(
+          `${movie.Title} added to your watchlist!`,
+          'Success',
+          {
+            duration: 2000,
+          }
+        );
       },
       (error) => {
-        console.error('Error adding to favorites:', error);
-        this.snackBar.open('Error adding to favorites', 'Error', {
-          duration: 2000,
-        });
+        console.error('Error adding to watchlist:', error);
+        this.snackBar.open(
+          'Failed to add movie to watchlist. Please try again.',
+          'Error',
+          {
+            duration: 2000,
+          }
+        );
       }
     );
   }
 
   removeTitleFromFavorites(movie: any): void {
-    this.movieService.removeFromFavorites(movie.Title).subscribe(
+    this.movieService.removeFromFavorites(movie._id).subscribe(
       () => {
-        this.favorites = this.favorites.filter(
-          (title) => title !== movie.Title
-        );
+        this.favorites = this.favorites.filter((id) => id !== movie._id);
         localStorage.setItem('favorites', JSON.stringify(this.favorites));
-        this.snackBar.open('Movie removed from favorites', 'Success', {
-          duration: 2000,
-        });
+        this.snackBar.open(
+          `${movie.Title} removed from your watchlist.`,
+          'Success',
+          {
+            duration: 2000,
+          }
+        );
       },
       (error) => {
-        console.error('Error removing from favorites:', error);
-        this.snackBar.open('Error removing from favorites', 'Error', {
+        console.error('Error removing from watchlist:', error);
+        this.snackBar.open('Failed to remove movie from watchlist.', 'Error', {
           duration: 2000,
         });
       }

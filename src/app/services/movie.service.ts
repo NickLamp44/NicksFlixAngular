@@ -8,6 +8,7 @@ import { Movie } from '../models/movie.model';
 })
 export class MovieService {
   private apiUrl = 'https://nicks-flix-364389a40fe7.herokuapp.com/movies';
+  private apiUrl2 = 'https://nicks-flix-364389a40fe7.herokuapp.com/users';
 
   constructor(private http: HttpClient) {}
 
@@ -29,19 +30,23 @@ export class MovieService {
     return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
 
-  addToFavorites(movieTitle: string): Observable<any> {
-    const username = localStorage.getItem('username');
-    return this.http.post(
-      `${this.apiUrl}/${username}/movies/${encodeURIComponent(movieTitle)}`,
-      {},
-      { headers: this.getAuthHeaders() }
-    );
+  addToWatchlist(movieId: string): Observable<any> {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser') || '{}');
+    const userId = currentUser._id;
+
+    if (!userId) {
+      throw new Error('User ID is missing!');
+    }
+
+    const url = `https://nicks-flix-364389a40fe7.herokuapp.com/users/${userId}/watchlist/${movieId}`;
+
+    return this.http.post(url, {}, { headers: this.getAuthHeaders() });
   }
 
   removeFromFavorites(movieTitle: string): Observable<any> {
     const username = localStorage.getItem('username');
     return this.http.delete(
-      `${this.apiUrl}/${username}/movies/${encodeURIComponent(movieTitle)}`,
+      `${this.apiUrl2}/${username}/movies/${encodeURIComponent(movieTitle)}`,
       { headers: this.getAuthHeaders() }
     );
   }
