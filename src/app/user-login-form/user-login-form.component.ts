@@ -44,7 +44,7 @@ export class UserLoginFormComponent {
 
         // Store token for authentication persistence
         localStorage.setItem('token', response.token);
-        localStorage.setItem('username', this.userData.username);
+        localStorage.setItem('currentUser', JSON.stringify(response.user));
 
         // Success message
         this.snackBar.open('Login successful', 'OK', { duration: 2000 });
