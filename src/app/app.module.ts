@@ -34,7 +34,6 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 
 import { SynopsisComponent } from './synopsis/synopsis.component';
 
-// ✅ Define Application Routes
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
@@ -50,7 +49,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
 
-    // ✅ Angular Material Modules
+    // Angular Material Modules
     MatSnackBarModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -62,7 +61,7 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatTabsModule,
 
-    // ✅ Import All Standalone Components Here
+    // Standalone Components
     UserRegistrationFormComponent,
     UserLoginFormComponent,
     MovieCardComponent,

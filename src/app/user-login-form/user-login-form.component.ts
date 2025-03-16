@@ -9,6 +9,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserLoginService } from '../fetch-api-data.service';
 
+/**
+ * Component for user login form.
+ * Allows users to log in by providing a username and password.
+ */
 @Component({
   selector: 'app-user-login-form',
   standalone: true,
@@ -24,17 +28,34 @@ import { UserLoginService } from '../fetch-api-data.service';
   styleUrls: ['./user-login-form.component.scss'],
 })
 export class UserLoginFormComponent {
+  /**
+   * Object holding user login credentials.
+   * @property {string} username - The username of the user.
+   * @property {string} password - The password of the user.
+   */
   userData = {
     username: '',
     password: '',
   };
 
+  /**
+   * Creates an instance of UserLoginFormComponent.
+   * @param {UserLoginService} loginService - Service for handling user login API requests.
+   * @param {MatSnackBar} snackBar - Snackbar service for displaying notifications.
+   * @param {Router} router - Router service for navigating between pages.
+   */
   constructor(
     private loginService: UserLoginService,
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
 
+  /**
+   * Logs in the user by sending their credentials to the API.
+   * If login is successful, stores authentication token and user data in local storage,
+   * displays a success message, and redirects to the movies page.
+   * If login fails, displays an error message.
+   */
   loginUser(): void {
     console.log('Logging in user:', this.userData);
 
